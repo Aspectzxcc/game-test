@@ -53,12 +53,12 @@ while running:
 
     # Automatic piece movement down
     if current_time - last_move_time > move_interval:
-        move_piece_down(current_piece)
+        current_piece = move_piece_down(current_piece)
         last_move_time = current_time
 
     # Fill the background, game logic, and update display
     screen.fill(SCREEN_BG)
-    draw_grid_2(screen)
+    render_grid(screen)
     draw_piece(screen, current_piece)
     pygame.display.flip()
 

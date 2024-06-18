@@ -31,7 +31,8 @@ GRID_OPTIONS = {
     'columns': 10,  # Number of columns
     'cell_size': 27,  # Size of each cell in pixels
     'origin': (70, 50),  # Move grid X and Y pixels from the top left corner of the screen
-    'color': (50, 50, 50)  # Color for the grid lines or cells
+    'color': (50, 50, 50),  # Color for the grid lines or cells
+    'border_thickness': 1  # Thickness of the grid border lines
 }
 
 # Actual game grid data
