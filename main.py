@@ -1,21 +1,16 @@
 import pygame
 import sys
+from init_screen import init_screen, draw_grid  # Import the init_screen function
 
-# Initialize Pygame
-pygame.init()
+# Initialize screen
+screen = init_screen()
 
 # Game Variables
-screen_width = 800
-screen_height = 600
 frame_rate = 30
 colors = {
     'background': (10, 10, 10),  # Dark background
     'tetrominoes': [(0, 255, 255), (255, 165, 0), (0, 0, 255), (255, 255, 0), (128, 0, 128), (0, 128, 0), (255, 0, 0)],  # Cyan, Orange, Blue, Yellow, Purple, Green, Red
 }
-
-# Create window
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption('Game-Test: A Pygame Tetris Clone')
 
 # Main game loop
 clock = pygame.time.Clock()
@@ -29,6 +24,7 @@ while running:
     screen.fill(colors['background'])
 
     # Game logic goes here
+    draw_grid(screen)
 
     # Update the display
     pygame.display.flip()
