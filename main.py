@@ -20,9 +20,7 @@ grid_origin = (70, 50)  # Move grid X and Y pixels from the top left corner of t
 game_grid = [[0 for _ in range(grid_columns)] for _ in range(grid_rows)]
 grid_color = (50, 50, 50)  # Color for the grid lines or cells
 
-
-    
-# Tetromino Shapes
+# Tetromino Variables
 tetromino_shapes = {
     'I': [[1, 1, 1, 1]],
     'O': [[1, 1],
@@ -38,7 +36,6 @@ tetromino_shapes = {
     'L': [[0, 0, 1],
           [1, 1, 1]]
 }
-
 tetromino_colors = {
     'I': (0, 255, 255),  # Cyan
     'O': (255, 165, 0),  # Orange
@@ -47,12 +44,7 @@ tetromino_colors = {
     'Z': (128, 0, 128),  # Purple
     'J': (0, 128, 0),  # Green
     'L': (255, 0, 0)  # Red
-
 }
-
-def rotate_shape(shape):
-    """Rotate the shape (a matrix) clockwise."""
-    return [list(row) for row in zip(*shape[::-1])]
 
 # Game Variables
 frame_rate = 30 # FPS
