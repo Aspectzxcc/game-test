@@ -13,12 +13,16 @@ screen_height = 600 # Screen Y height
 screen = init_screen(screen_width, screen_height)
 
 # Define Grid Variables
-grid_rows = 20 # Number of rows
-grid_columns = 10 # Number of columns
-cell_size = 25  # Size of each cell in pixels
-grid_origin = (70, 50)  # Move grid X and Y pixels from the top left corner of the screen
-game_grid = [[0 for _ in range(grid_columns)] for _ in range(grid_rows)]
-grid_color = (50, 50, 50)  # Color for the grid lines or cells
+grid_options = {
+    'rows': 20,  # Number of rows
+    'columns': 10,  # Number of columns
+    'cell_size': 25,  # Size of each cell in pixels
+    'origin': (70, 50),  # Move grid X and Y pixels from the top left corner of the screen
+    'color': (50, 50, 50)  # Color for the grid lines or cells
+}
+
+# Create the game grid
+game_grid = [[0 for _ in range(grid_options['columns'])] for _ in range(grid_options['rows'])]
 
 # Tetromino Variables
 tetromino_shapes = {
@@ -62,7 +66,7 @@ while running:
     screen.fill(background_color)
 
     # Game logic goes here
-    draw_grid(screen)
+    draw_grid(screen, grid_options)
 
     # Update the display
     pygame.display.flip()
