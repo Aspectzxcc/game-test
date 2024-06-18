@@ -8,9 +8,16 @@ pygame.init()
 screen_width = 800 # Screen X width
 screen_height = 600 # Screen Y height
 frame_rate = 30 # FPS
-colors = {
-    'background': (10, 10, 10),  # Dark background
-    'tetrominoes': [(0, 255, 255), (255, 165, 0), (0, 0, 255), (255, 255, 0), (128, 0, 128), (0, 128, 0), (255, 0, 0)],  # Cyan, Orange, Blue, Yellow, Purple, Green, Red
+background_color = (10, 10, 10) # Dark background
+tetrominoes_color = {
+    'I': (0, 255, 255),  # Cyan
+    'O': (255, 165, 0),  # Orange
+    'T': (0, 0, 255),  # Blue
+    'S': (255, 255, 0),  # Yellow
+    'Z': (128, 0, 128),  # Purple
+    'J': (0, 128, 0),  # Green
+    'L': (255, 0, 0)  # Red
+
 }
 
 # Create window
@@ -79,7 +86,7 @@ while running:
             running = False
 
     # Fill the background
-    screen.fill(colors['background'])
+    screen.fill(background_color)
 
     # Game logic goes here
     draw_grid(screen)
