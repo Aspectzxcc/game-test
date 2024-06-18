@@ -14,6 +14,9 @@ GRID_OPTIONS = {
     'color': (50, 50, 50)  # Color for the grid lines or cells
 }
 
+# Actual game grid data
+GAME_GRID = [[0 for _ in range(GRID_OPTIONS['columns'])] for _ in range(GRID_OPTIONS['rows'])]
+
 # colors
 SCREEN_BG = (10, 10, 10)  # Dark Background color
 CYAN = (0, 255, 255)  # I tetromino

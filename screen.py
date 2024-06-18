@@ -19,3 +19,16 @@ def draw_grid(screen):
     # Draw the rectangle
     pygame.draw.rect(screen, GRID_OPTIONS['color'], grid_rect, 5)  # Drawing the grid with border thickness 1 pixel
     
+def draw_piece(screen, piece):
+    shape = TETRONIMOS[piece['shape']]['shape']
+    color = piece['color']
+    position = piece['position']
+    cell_size = GRID_OPTIONS['cell_size']
+    for y, row in enumerate(shape):
+        for x, cell in enumerate(row):
+            if cell:
+                pygame.draw.rect(screen, color, pygame.Rect(
+                    (position[1] + x) * cell_size + GRID_OPTIONS['origin'][0],
+                    (position[0] + y) * cell_size + GRID_OPTIONS['origin'][1],
+                    cell_size, cell_size))
+    

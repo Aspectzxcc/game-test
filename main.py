@@ -1,7 +1,7 @@
 import pygame
 import sys
 from settings import *
-from screen import init_screen, draw_grid
+from screen import *
 
 # Initialize Pygame
 pygame.init()
@@ -9,13 +9,10 @@ pygame.init()
 # Create screen
 screen = init_screen(SCREEN_WIDTH, SCREEN_HEIGHT)
 
-# Create the game grid
-game_grid = [[0 for _ in range(GRID_OPTIONS['columns'])] for _ in range(GRID_OPTIONS['rows'])]
-
+# Main game loop
 clock = pygame.time.Clock()
 running = True
 
-# Main game loop
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
