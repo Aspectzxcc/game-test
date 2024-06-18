@@ -34,7 +34,7 @@ def draw_grid_2(screen):
             pygame.draw.rect(screen, GRID_OPTIONS['color'], pygame.Rect(cell_x, cell_y, cell_size, cell_size), 1)
     
 def draw_piece(screen, piece):
-    shape = TETRONIMOS[piece['shape']]['shape']
+    shape = TETROMINOS[piece['shape']]['shape']
     color = piece['color']
     position = piece['position']
     cell_size = GRID_OPTIONS['cell_size']

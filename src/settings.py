@@ -27,7 +27,7 @@ PURPLE = (128, 0, 128)  # Z tetromino
 GREEN = (0, 128, 0)  # J tetromino
 RED = (255, 0, 0)  # L tetromino
 
-TETRONIMOS = {
+TETROMINOS = {
     'I': {'shape': [[1, 1, 1, 1]], 'color': CYAN},
     'O': {'shape': 
          [[1, 1],
