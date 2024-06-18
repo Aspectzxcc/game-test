@@ -19,7 +19,7 @@ MOVE_TIMERS = {
 }
 
 # FPS 
-FRAME_RATE = 20
+FRAME_RATE = 30
 
 # Game variables
 MOVE_INTERVAL = 1000  # Move the piece down every 1000 milliseconds (1 second)  

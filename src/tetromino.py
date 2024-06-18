@@ -40,22 +40,22 @@ def rotate_piece(current_piece):
     # Reverse each row to get the rotated matrix
     rotated_matrix = [row[::-1] for row in transposed_matrix]
     
-    # Temporarily update the shape to check for collisions
-    original_shape = shape_matrix[:]
-    TETROMINOS[current_piece['shape']]['shape'] = rotated_matrix
+    # Temporarily update the shape in the current_piece dictionary to check for collisions
+    current_piece['shape_matrix'] = rotated_matrix  # Temporarily store the rotated shape for collision checks
     
-    shift_directions = [(0, 0), (0, -1), (0, 1), (-1, 0)]  # No shift, left, right, up
+    shift_directions = [(0, 0), (0, -1), (0, 1), (-1, 0), (1, 0), (-2, 0), (2, 0)]  # Including further shifts
     for dx, dy in shift_directions:
-        current_piece['position'][0] += dx
-        current_piece['position'][1] += dy
+        # Reset position to original before each shift attempt
+        current_piece['position'] = [original_position[0] + dx, original_position[1] + dy]
         if not check_rotation_collision(current_piece, GAME_GRID):
             # If no collision, rotation and position adjustment is successful
+            # Update the shape in TETROMINOS to the rotated shape
+            TETROMINOS[current_piece['shape']]['shape'] = rotated_matrix
             return
-        # Reset position for the next iteration
-        current_piece['position'] = original_position[:]
     
-    # If all shifts result in collision, revert to the original shape and position
-    TETROMINOS[current_piece['shape']]['shape'] = original_shape
+    # Revert to the original shape and position if all shifts result in collision
+    current_piece['position'] = original_position
+    # No need to revert the shape in TETROMINOS since it was never permanently changed
     
 def check_piece_collision(current_piece, next_position, game_grid):
     """
