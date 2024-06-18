@@ -16,7 +16,7 @@ screen = init_screen(screen_width, screen_height)
 grid_options = {
     'rows': 20,  # Number of rows
     'columns': 10,  # Number of columns
-    'cell_size': 25,  # Size of each cell in pixels
+    'cell_size': 27,  # Size of each cell in pixels
     'origin': (70, 50),  # Move grid X and Y pixels from the top left corner of the screen
     'color': (50, 50, 50)  # Color for the grid lines or cells
 }
