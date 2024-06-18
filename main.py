@@ -36,6 +36,38 @@ def draw_grid(screen):
     
     # Draw the rectangle
     pygame.draw.rect(screen, grid_color, grid_rect, 5)  # Drawing the grid with border thickness 1 pixel
+    
+# Tetromino Shapes
+tetromino_shapes = {
+    'I': [[1, 1, 1, 1]],
+    'O': [[1, 1],
+          [1, 1]],
+    'T': [[0, 1, 0],
+          [1, 1, 1]],
+    'S': [[0, 1, 1],
+          [1, 1, 0]],
+    'Z': [[1, 1, 0],
+          [0, 1, 1]],
+    'J': [[1, 0, 0],
+          [1, 1, 1]],
+    'L': [[0, 0, 1],
+          [1, 1, 1]]
+}
+
+# Assign colors to shapes
+tetromino_colors = {
+    'I': colors['tetrominoes'][0],
+    'O': colors['tetrominoes'][1],
+    'T': colors['tetrominoes'][2],
+    'S': colors['tetrominoes'][3],
+    'Z': colors['tetrominoes'][4],
+    'J': colors['tetrominoes'][5],
+    'L': colors['tetrominoes'][6]
+}
+
+def rotate_shape(shape):
+    """Rotate the shape (a matrix) clockwise."""
+    return [list(row) for row in zip(*shape[::-1])]
 
 # Main game loop
 clock = pygame.time.Clock()
