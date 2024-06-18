@@ -1,6 +1,6 @@
 import pygame
 import sys
-from screen import init_screen
+from screen import init_screen, draw_grid
 
 # Initialize Pygame
 pygame.init()
@@ -12,26 +12,15 @@ screen_height = 600 # Screen Y height
 # Create screen
 screen = init_screen(screen_width, screen_height)
 
-# Define Grid Size
+# Define Grid Variables
 grid_rows = 20 # Number of rows
 grid_columns = 10 # Number of columns
 cell_size = 25  # Size of each cell in pixels
 grid_origin = (70, 50)  # Move grid X and Y pixels from the top left corner of the screen
 game_grid = [[0 for _ in range(grid_columns)] for _ in range(grid_rows)]
-
-# Define colors
 grid_color = (50, 50, 50)  # Color for the grid lines or cells
 
-def draw_grid(screen):
-    # Calculate the total width and height of the grid
-    grid_width = grid_columns * cell_size
-    grid_height = grid_rows * cell_size
-    
-    # Create a rectangle for the entire grid
-    grid_rect = pygame.Rect(grid_origin[0], grid_origin[1], grid_width, grid_height)
-    
-    # Draw the rectangle
-    pygame.draw.rect(screen, grid_color, grid_rect, 5)  # Drawing the grid with border thickness 1 pixel
+
     
 # Tetromino Shapes
 tetromino_shapes = {
