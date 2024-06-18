@@ -3,7 +3,7 @@ from src.settings import *
 
 def get_new_piece():
     """Select a new piece and its initial position and color."""
-    shape_key = random.choice(list(TETROMINOS.keys()))
+    shape_key = 'I'
     initial_position = [0, GRID_OPTIONS['columns'] // 2 - 2]
     color = TETROMINOS[shape_key]['color']
     return {
@@ -30,21 +30,24 @@ def move_piece_right(current_piece):
         return # Don't move if there's a collision
     current_piece['position'][1] += 1
     
+def rotate_shape(shape_matrix):
+    # Rotate the shape matrix 90 degrees clockwise
+    transposed_matrix = [list(row) for row in zip(*shape_matrix)]
+    return [row[::-1] for row in transposed_matrix]
+    
 def rotate_piece(current_piece):
     """Rotate the current piece 90 degrees clockwise, adjusting its position in case of collision."""
     original_position = current_piece['position'][:]
     shape_matrix = TETROMINOS[current_piece['shape']]['shape']
     
-    # Transpose the matrix
-    transposed_matrix = [list(row) for row in zip(*shape_matrix)]
-    # Reverse each row to get the rotated matrix
-    rotated_matrix = [row[::-1] for row in transposed_matrix]
+    rotated_matrix = rotate_shape(shape_matrix)
     
     # Temporarily update the shape in the current_piece dictionary to check for collisions
     current_piece['shape_matrix'] = rotated_matrix  # Temporarily store the rotated shape for collision checks
     
-    # Shift the pieces in all directions to determine the best position after rotation
-    shift_directions = [(0, 0), (0, -1), (0, 1), (-1, 0), (1, 0)]
+    # Use calculate_shift_directions to dynamically generate shift directions
+    shift_directions = calculate_shift_directions(rotated_matrix)
+    
     for dx, dy in shift_directions:
         # Reset position to original before each shift attempt
         current_piece['position'] = [original_position[0] + dx, original_position[1] + dy]
@@ -56,7 +59,38 @@ def rotate_piece(current_piece):
     
     # Revert to the original shape and position if all shifts result in collision
     current_piece['position'] = original_position
-    # No need to revert the shape in TETROMINOS since it was never permanently changed
+    
+def calculate_shift_directions(shape_matrix):
+    """
+    Calculate possible shift directions based on the shape matrix dimensions.
+    This function aims to dynamically generate shift directions to accommodate
+    the unique rotation needs of different Tetris pieces, including the "I" piece,
+    especially near the horizontal and bottom edges of the grid.
+    """
+    height = len(shape_matrix)
+    width = len(shape_matrix[0]) if height > 0 else 0
+
+    # Basic shifts for all pieces
+    shift_directions = [(0, 0), (0, -1), (0, 1), (-1, 0), (1, 0)]
+
+    # Add more shifts for taller or wider pieces
+    if width > 2:  # Assuming width > 2 needs special handling, like the "I" piece
+        shift_directions += [(0, -2), (0, 2)]
+    if height > 2:  # Assuming height > 2 might also need special handling
+        shift_directions += [(-2, 0), (2, 0)]
+
+    # Diagonal shifts for pieces that are both tall and wide
+    if width > 2 and height > 2:
+        shift_directions += [(-1, -1), (-1, 1), (1, -1), (1, 1), (-2, -2), (-2, 2), (2, -2), (2, 2)]
+
+    # Additional shifts for "I" piece near the horizontal and bottom edges
+    if width == 4 or height == 4:  # Specific to the "I" piece
+        shift_directions += [(0, -3), (0, 3), (-1, -2), (-1, 2), (1, -2), (1, 2)]
+        # Allow for more extreme shifts to avoid edge collisions
+        if height == 4:  # Vertical "I" piece might need to shift more on the horizontal axis
+            shift_directions += [(-3, 0), (3, 0)]
+
+    return shift_directions
     
 def check_piece_collision(current_piece, next_position, game_grid):
     """
