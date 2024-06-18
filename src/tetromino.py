@@ -1,5 +1,5 @@
 import random
-from settings import *
+from src.settings import *
 
 def get_new_piece():
     """Select a new piece and its initial position and color."""

@@ -2,6 +2,7 @@ import pygame
 import sys
 from src.settings import *
 from src.screen import *
+from src.tetromino import *
 
 # Initialize Pygame
 pygame.init()
@@ -22,7 +23,9 @@ while running:
     screen.fill(SCREEN_BG)
 
     # Game logic goes here
-    draw_grid(screen)
+    # draw_grid(screen)
+    draw_grid_2(screen)
+    draw_piece(screen, get_new_piece())
 
     # Update the display
     pygame.display.flip()

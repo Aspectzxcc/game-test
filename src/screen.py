@@ -1,5 +1,5 @@
 import pygame
-from settings import *
+from src.settings import *
 
 def init_screen(screen_width, screen_height):
     # Create window
@@ -8,6 +8,7 @@ def init_screen(screen_width, screen_height):
     
     return screen
 
+# draw grid without cell borders
 def draw_grid(screen):
     # Calculate the total width and height of the grid
     grid_width = GRID_OPTIONS['columns'] * GRID_OPTIONS['cell_size']
@@ -18,6 +19,19 @@ def draw_grid(screen):
     
     # Draw the rectangle
     pygame.draw.rect(screen, GRID_OPTIONS['color'], grid_rect, 5)  # Drawing the grid with border thickness 1 pixel
+    
+# draw grid with cell borders
+def draw_grid_2(screen):
+    cell_size = GRID_OPTIONS['cell_size']
+    columns = GRID_OPTIONS['columns']
+    rows = GRID_OPTIONS['rows']
+    origin_x, origin_y = GRID_OPTIONS['origin']
+
+    for row in range(rows):
+        for col in range(columns):
+            cell_x = origin_x + col * cell_size
+            cell_y = origin_y + row * cell_size
+            pygame.draw.rect(screen, GRID_OPTIONS['color'], pygame.Rect(cell_x, cell_y, cell_size, cell_size), 1)
     
 def draw_piece(screen, piece):
     shape = TETRONIMOS[piece['shape']]['shape']
