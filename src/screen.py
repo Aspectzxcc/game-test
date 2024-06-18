@@ -52,11 +52,15 @@ def draw_piece(screen, piece):
     color = piece['color']
     position = piece['position']
     cell_size = GRID_OPTIONS['cell_size']
+    border_thickness = GRID_OPTIONS['border_thickness']
+
     for y, row in enumerate(shape):
         for x, cell in enumerate(row):
             if cell:
+                # Adjust position by adding border_thickness to account for the grid border
                 pygame.draw.rect(screen, color, pygame.Rect(
-                    (position[1] + x) * cell_size + GRID_OPTIONS['origin'][0],
-                    (position[0] + y) * cell_size + GRID_OPTIONS['origin'][1],
-                    cell_size, cell_size))
+                    (position[1] + x) * cell_size + GRID_OPTIONS['origin'][0] + border_thickness,
+                    (position[0] + y) * cell_size + GRID_OPTIONS['origin'][1] + border_thickness,
+                    cell_size - border_thickness*2,  # Subtract border_thickness*2 to maintain cell size inside borders
+                    cell_size - border_thickness*2))
     
