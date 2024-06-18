@@ -1,7 +1,7 @@
 import pygame
 import sys
-from settings import *
-from screen import *
+from src.settings import *
+from src.screen import *
 
 # Initialize Pygame
 pygame.init()
