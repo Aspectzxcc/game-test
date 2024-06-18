@@ -1,12 +1,29 @@
+import pygame 
+
 # Screen variables
 SCREEN_WIDTH = 800 # Screen X width
 SCREEN_HEIGHT = 600 # Screen Y height
+
+# Key states for continuous movement
+KEY_STATES = {
+     pygame.K_DOWN: False,
+     pygame.K_LEFT: False,
+     pygame.K_RIGHT: False,
+}
+
+# Initialize timers for continuous movement
+MOVE_TIMERS = {
+    pygame.K_DOWN: 0,
+    pygame.K_LEFT: 0,
+    pygame.K_RIGHT: 0
+}
 
 # FPS 
 FRAME_RATE = 20
 
 # Game variables
 MOVE_INTERVAL = 1000  # Move the piece down every 1000 milliseconds (1 second)  
+MOVE_DELAY = 100  # Milliseconds delay between moves for continuous key press
 
 # Grid variables
 GRID_OPTIONS = {

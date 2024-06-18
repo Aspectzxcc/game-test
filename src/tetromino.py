@@ -31,18 +31,31 @@ def move_piece_right(current_piece):
     current_piece['position'][1] += 1
     
 def rotate_piece(current_piece):
-    """Rotate the current piece 90 degrees clockwise."""
-    if check_rotation_collision(current_piece, GAME_GRID):
-        return  # Don't rotate if there's a collision
-    
+    """Rotate the current piece 90 degrees clockwise, adjusting its position in case of collision."""
+    original_position = current_piece['position'][:]
     shape_matrix = TETROMINOS[current_piece['shape']]['shape']
     
     # Transpose the matrix
     transposed_matrix = [list(row) for row in zip(*shape_matrix)]
     # Reverse each row to get the rotated matrix
     rotated_matrix = [row[::-1] for row in transposed_matrix]
-    # Update the shape in the TETROMINOS dictionary to reflect the rotation
+    
+    # Temporarily update the shape to check for collisions
+    original_shape = shape_matrix[:]
     TETROMINOS[current_piece['shape']]['shape'] = rotated_matrix
+    
+    shift_directions = [(0, 0), (0, -1), (0, 1), (-1, 0)]  # No shift, left, right, up
+    for dx, dy in shift_directions:
+        current_piece['position'][0] += dx
+        current_piece['position'][1] += dy
+        if not check_rotation_collision(current_piece, GAME_GRID):
+            # If no collision, rotation and position adjustment is successful
+            return
+        # Reset position for the next iteration
+        current_piece['position'] = original_position[:]
+    
+    # If all shifts result in collision, revert to the original shape and position
+    TETROMINOS[current_piece['shape']]['shape'] = original_shape
     
 def check_piece_collision(current_piece, next_position, game_grid):
     """
