@@ -27,18 +27,18 @@ while running:
             running = False
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DOWN:
-                current_piece['position'][0] += 1  # Move down
+                move_piece_down(current_piece)  # Move the piece down
             elif event.key == pygame.K_UP:
                 rotate_piece(current_piece)  # Rotate the piece
                 pass 
             elif event.key == pygame.K_LEFT:
-                current_piece['position'][1] -= 1  # Move left
+                move_piece_left(current_piece)  # Move left
             elif event.key == pygame.K_RIGHT:
-                current_piece['position'][1] += 1  # Move right
+                move_piece_right(current_piece) # Move right
 
     # Check if it's time to move the piece down automatically
     if current_time - last_move_time > move_interval:
-        current_piece['position'][0] += 1  # Move the piece down
+        move_piece_down(current_piece)  # Move the piece down
         last_move_time = current_time  # Reset the last move time
 
     # Fill the background
