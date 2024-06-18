@@ -5,6 +5,9 @@ SCREEN_HEIGHT = 600 # Screen Y height
 # FPS 
 FRAME_RATE = 20
 
+# Game variables
+MOVE_INTERVAL = 1000  # Move the piece down every 1000 milliseconds (1 second)  
+
 # Grid variables
 GRID_OPTIONS = {
     'rows': 20,  # Number of rows

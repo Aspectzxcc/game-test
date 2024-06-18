@@ -18,7 +18,7 @@ current_piece = get_new_piece()
 
 # Initialize the timer for moving the piece down
 last_move_time = pygame.time.get_ticks()
-move_interval = 1000  # Move the piece down every 1000 milliseconds (1 second)
+move_interval = MOVE_INTERVAL
 
 while running:
     current_time = pygame.time.get_ticks()
@@ -29,8 +29,8 @@ while running:
             if event.key == pygame.K_DOWN:
                 current_piece['position'][0] += 1  # Move down
             elif event.key == pygame.K_UP:
-                # Typically used for piece rotation
-                pass  # Replace with rotation logic if applicable
+                rotate_piece(current_piece)  # Rotate the piece
+                pass 
             elif event.key == pygame.K_LEFT:
                 current_piece['position'][1] -= 1  # Move left
             elif event.key == pygame.K_RIGHT:

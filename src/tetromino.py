@@ -23,3 +23,13 @@ def move_piece_left(current_piece):
 def move_piece_right(current_piece):
     """Move the current piece right by one column."""
     current_piece['position'][1] += 1
+    
+def rotate_piece(current_piece):
+    """Rotate the current piece 90 degrees clockwise."""
+    shape_matrix = TETROMINOS[current_piece['shape']]['shape']
+    # Transpose the matrix
+    transposed_matrix = [list(row) for row in zip(*shape_matrix)]
+    # Reverse each row to get the rotated matrix
+    rotated_matrix = [row[::-1] for row in transposed_matrix]
+    # Update the shape in the TETROMINOS dictionary to reflect the rotation
+    TETROMINOS[current_piece['shape']]['shape'] = rotated_matrix
