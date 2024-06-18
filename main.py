@@ -1,28 +1,16 @@
 import pygame
 import sys
+from screen import init_screen
 
 # Initialize Pygame
 pygame.init()
 
-# Game Variables
+# Screen variables
 screen_width = 800 # Screen X width
 screen_height = 600 # Screen Y height
-frame_rate = 30 # FPS
-background_color = (10, 10, 10) # Dark background
-tetrominoes_color = {
-    'I': (0, 255, 255),  # Cyan
-    'O': (255, 165, 0),  # Orange
-    'T': (0, 0, 255),  # Blue
-    'S': (255, 255, 0),  # Yellow
-    'Z': (128, 0, 128),  # Purple
-    'J': (0, 128, 0),  # Green
-    'L': (255, 0, 0)  # Red
-
-}
-
-# Create window
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption('Game-Test: A Pygame Tetris Clone')
+    
+# Create screen
+screen = init_screen(screen_width, screen_height)
 
 # Define Grid Size
 grid_rows = 20 # Number of rows
@@ -62,24 +50,28 @@ tetromino_shapes = {
           [1, 1, 1]]
 }
 
-# Assign colors to shapes
 tetromino_colors = {
-    'I': colors['tetrominoes'][0],
-    'O': colors['tetrominoes'][1],
-    'T': colors['tetrominoes'][2],
-    'S': colors['tetrominoes'][3],
-    'Z': colors['tetrominoes'][4],
-    'J': colors['tetrominoes'][5],
-    'L': colors['tetrominoes'][6]
+    'I': (0, 255, 255),  # Cyan
+    'O': (255, 165, 0),  # Orange
+    'T': (0, 0, 255),  # Blue
+    'S': (255, 255, 0),  # Yellow
+    'Z': (128, 0, 128),  # Purple
+    'J': (0, 128, 0),  # Green
+    'L': (255, 0, 0)  # Red
+
 }
 
 def rotate_shape(shape):
     """Rotate the shape (a matrix) clockwise."""
     return [list(row) for row in zip(*shape[::-1])]
 
-# Main game loop
+# Game Variables
+frame_rate = 30 # FPS
+background_color = (10, 10, 10) # Dark background
 clock = pygame.time.Clock()
 running = True
+
+# Main game loop
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
