@@ -22,6 +22,7 @@ grid_rows = 20 # Number of rows
 grid_columns = 10 # Number of columns
 cell_size = 25  # Size of each cell in pixels
 grid_origin = (70, 50)  # Move grid X and Y pixels from the top left corner of the screen
+game_grid = [[0 for _ in range(grid_columns)] for _ in range(grid_rows)]
 
 # Define colors
 grid_color = (50, 50, 50)  # Color for the grid lines or cells
