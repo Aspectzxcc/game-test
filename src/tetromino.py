@@ -43,7 +43,8 @@ def rotate_piece(current_piece):
     # Temporarily update the shape in the current_piece dictionary to check for collisions
     current_piece['shape_matrix'] = rotated_matrix  # Temporarily store the rotated shape for collision checks
     
-    shift_directions = [(0, 0), (0, -1), (0, 1), (-1, 0), (1, 0), (-2, 0), (2, 0)]  # Including further shifts
+    # Shift the pieces in all directions to determine the best position after rotation
+    shift_directions = [(0, 0), (0, -1), (0, 1), (-1, 0), (1, 0)]
     for dx, dy in shift_directions:
         # Reset position to original before each shift attempt
         current_piece['position'] = [original_position[0] + dx, original_position[1] + dy]
