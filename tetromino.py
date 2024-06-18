@@ -29,7 +29,7 @@ tetromino_colors = {
 def get_new_piece():
     """Select a new piece and its initial position and color."""
     shape_key = random.choice(list(tetromino_shapes.keys()))
-    initial_position = [0, grid_options['columns'] // 2 - len(tetromino_shapes[shape_key][0]) // 2]
+    initial_position = [0, 4]
     color = tetromino_colors[shape_key]
     return {
         'shape': shape_key,
