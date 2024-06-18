@@ -3,7 +3,7 @@ SCREEN_WIDTH = 800 # Screen X width
 SCREEN_HEIGHT = 600 # Screen Y height
 
 # FPS 
-FRAME_RATE = 30
+FRAME_RATE = 20
 
 # Grid variables
 GRID_OPTIONS = {
