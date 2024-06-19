@@ -30,6 +30,7 @@ def reset_game():
     piece_locked = False
     last_move_time =  pygame.time.get_ticks()
     move_interval = MOVE_INTERVAL
+    
 
 while running:
     current_time = pygame.time.get_ticks()
@@ -82,13 +83,6 @@ while running:
     screen.fill(SCREEN_BG)
     render_grid(screen)
     draw_piece(screen, current_piece)
-    
-    if game_over:
-        should_continue = display_game_over_screen(screen)
-        if should_continue:
-            reset_game()
-        else:
-            running = False 
         
     # Update the display
     pygame.display.flip()
