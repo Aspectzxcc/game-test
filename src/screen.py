@@ -9,12 +9,12 @@ def init_screen(screen_width, screen_height):
     
     return screen
 
-def render_grid(screen):
-    draw_grid(screen)
+def render_grid(screen, GAME_GRID):
+    draw_grid(screen, GAME_GRID)
     draw_grid_cells(screen)
     draw_grid_borders(screen)
 
-def draw_grid(screen):
+def draw_grid(screen, GAME_GRID):
     for y, row in enumerate(GAME_GRID):
         for x, cell in enumerate(row):
             if cell:  # If the cell is not empty, draw it

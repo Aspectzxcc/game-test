@@ -81,7 +81,7 @@ while running:
 
     # Fill the background, game logic, and update display
     screen.fill(SCREEN_BG)
-    render_grid(screen)
+    render_grid(screen, GAME_GRID)
     draw_piece(screen, current_piece)
         
     # Update the display
