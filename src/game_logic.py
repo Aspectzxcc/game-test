@@ -31,8 +31,9 @@ def lock_piece(current_piece):
         GAME_GRID[x][y] = current_piece['color']
     clear_lines()
     if check_game_over():
-        # Handle game over scenario
         return True
+    
+    return False
         
 def check_game_over():
     """Check if placing a new piece at its starting position would cause a collision, indicating a game over."""
