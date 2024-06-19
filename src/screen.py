@@ -1,5 +1,6 @@
 import pygame
 from src.settings import *
+import sys
 
 def init_screen(screen_width, screen_height):
     # Create window
@@ -64,3 +65,39 @@ def draw_piece(screen, piece):
                     cell_size - border_thickness*2,  # Subtract border_thickness*2 to maintain cell size inside borders
                     cell_size - border_thickness*2))
     
+def display_game_over_screen(screen):
+    # Set the game over message
+    game_over_text = "Game Over"
+    instructions_text = "Press any key to restart"
+
+    # Set the font: You can adjust the font and size as needed
+    font = pygame.font.Font(None, 74)
+    instructions_font = pygame.font.Font(None, 36)
+
+    # Render the text
+    game_over_surface = font.render(game_over_text, True, (255, 0, 0))  # Red color
+    instructions_surface = instructions_font.render(instructions_text, True, (255, 255, 255))  # White color
+
+    # Get the text rectangle
+    game_over_rect = game_over_surface.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2))
+    instructions_rect = instructions_surface.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 50))
+
+    # Fill the screen with a black background
+    screen.fill((0, 0, 0))
+
+    # Draw the text on the screen
+    screen.blit(game_over_surface, game_over_rect)
+    screen.blit(instructions_surface, instructions_rect)
+
+    # Update the display
+    pygame.display.flip()
+
+    # Wait for a key press to restart or exit
+    waiting_for_input = True
+    while waiting_for_input:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                waiting_for_input = False
+            elif event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()

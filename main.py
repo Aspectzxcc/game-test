@@ -61,7 +61,7 @@ while running:
             game_over = lock_piece(current_piece)  # lock_piece now returns True if game over
             if game_over:
                 running = False  # Stop the game loop
-                # display_game_over_screen() 
+                display_game_over_screen(screen) 
             else:
                 current_piece = get_new_piece()
                 piece_locked = False
