@@ -4,7 +4,7 @@ from src.utils.collision import *
 
 def get_new_piece():
     """Select a new piece and its initial position and color."""
-    shape_key = random.choice(list(TETROMINOS.keys()))
+    shape_key = 'I'
     initial_position = [0, GRID_OPTIONS['columns'] // 2 - 2]
     color = TETROMINOS[shape_key]['color']
     return {
@@ -34,14 +34,14 @@ def lock_piece(current_piece):
         # Handle game over scenario
     
 def move_piece_down(current_piece):
-    """Move the current piece down by one row or lock it if it can't move, then return the possibly new piece."""
+    """Move the current piece down by one row or lock it if it can't move. Return a boolean indicating if the piece was locked."""
     next_position = (current_piece['position'][0] + 1, current_piece['position'][1])
     if check_piece_collision(current_piece, next_position):
         lock_piece(current_piece)  # Locks the piece and integrates it into the grid
-        return get_new_piece()  # Return a new piece since the current one is locked
+        return True  # Return True for collision indicating the piece was locked
     else:
         current_piece['position'][0] += 1
-        return current_piece  # Return the moved piece
+        return False  # Return False since there was no collision and the piece was not locked
 
 def move_piece_left(current_piece):
     """Move the current piece left by one column."""
