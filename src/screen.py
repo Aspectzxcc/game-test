@@ -68,7 +68,7 @@ def draw_piece(screen, piece):
 def display_game_over_screen(screen):
     # Set the game over message
     game_over_text = "Game Over"
-    instructions_text = "Press any key to restart"
+    instructions_text = "Press any key to exit"
 
     # Set the font: You can adjust the font and size as needed
     font = pygame.font.Font(None, 74)
