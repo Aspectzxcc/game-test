@@ -59,6 +59,8 @@ while running:
         piece_locked = move_piece_down(current_piece)
         if piece_locked:
             lock_piece(current_piece)
+            if check_game_over():
+                running = False  # Exit the main game loop
             current_piece = get_new_piece()
             piece_locked = False
         last_move_time = current_time

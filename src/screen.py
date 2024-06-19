@@ -63,4 +63,31 @@ def draw_piece(screen, piece):
                     (position[0] + y) * cell_size + GRID_OPTIONS['origin'][1] + border_thickness,
                     cell_size - border_thickness*2,  # Subtract border_thickness*2 to maintain cell size inside borders
                     cell_size - border_thickness*2))
+                
+def display_game_over_message(screen):
+    # Define the font and size for the message
+    font = pygame.font.Font(None, 74)
+    game_over_text = font.render('Game Over', True, (255, 0, 0))  # Red color
+    restart_text = font.render('Press any key to restart', True, (255, 255, 255))  # White color
+
+    # Calculate the position for the text to be centered
+    text_rect = game_over_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3))
+    restart_text_rect = restart_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2))
+
+    # Blit the text onto the screen
+    screen.blit(game_over_text, text_rect)
+    screen.blit(restart_text, restart_text_rect)
+
+    # Update the display to show the message
+    pygame.display.flip()
+
+    # Wait for a key press to restart the game
+    waiting_for_key = True
+    while waiting_for_key:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                waiting_for_key = False
+            elif event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
     

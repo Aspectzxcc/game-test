@@ -30,8 +30,17 @@ def lock_piece(current_piece):
     for x, y in get_occupied_positions(current_piece):
         GAME_GRID[x][y] = current_piece['color']
     clear_lines()
-    # if check_game_over(get_new_piece(), GAME_GRID):
-        # Handle game over scenario
+        
+def check_game_over():
+    """
+    Check if the game is over by attempting to place a new piece at the top of the grid.
+    If there's a collision, the game is over.
+    
+    :return: True if the game is over, False otherwise.
+    """
+    new_piece = get_new_piece()  # Generate a new piece
+    # Check for collision at the new piece's initial position
+    return check_piece_collision(new_piece, new_piece['position'])
         
 def clear_lines():
     """Remove all fully occupied rows from the grid and shift remaining rows down."""
