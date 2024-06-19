@@ -32,7 +32,7 @@ def reset_game():
     move_interval = MOVE_INTERVAL  # Reset the move interval to its initial value from settings
 
     # Clear the game grid
-    GAME_GRID = [[0 for _ in range(GRID_OPTIONS['columns'])] for _ in range(GRID_OPTIONS['rows'])]
+    reset_settings()
 
     # Reset the running state to True to restart the game loop
     running = True

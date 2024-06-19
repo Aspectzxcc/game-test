@@ -69,3 +69,46 @@ TETROMINOS = {
          [[0, 0, 1],
           [1, 1, 1]], 'color': RED}
 }
+
+def reset_settings():
+    global GAME_GRID, KEY_STATES, MOVE_TIMERS, TETROMINOS
+
+    # Reset the game grid
+    GAME_GRID = [[0 for _ in range(GRID_OPTIONS['columns'])] for _ in range(GRID_OPTIONS['rows'])]
+
+    # Reset key states
+    KEY_STATES = {
+        pygame.K_DOWN: False,
+        pygame.K_LEFT: False,
+        pygame.K_RIGHT: False,
+    }
+
+    # Reset move timers
+    MOVE_TIMERS = {
+        pygame.K_DOWN: 0,
+        pygame.K_LEFT: 0,
+        pygame.K_RIGHT: 0,
+    }
+    
+    # Reset tetrominos
+    TETROMINOS = {
+    'I': {'shape': [[1, 1, 1, 1]], 'color': CYAN},
+    'O': {'shape': 
+         [[1, 1],
+          [1, 1]], 'color': ORANGE},    
+    'T': {'shape': 
+         [[0, 1, 0],
+          [1, 1, 1]], 'color': BLUE},
+    'S': {'shape': 
+         [[0, 1, 1],
+          [1, 1, 0]], 'color': YELLOW}, 
+    'Z': {'shape': 
+         [[1, 1, 0],
+          [0, 1, 1]], 'color': PURPLE},
+    'J': {'shape': 
+         [[1, 0, 0],
+          [1, 1, 1]], 'color': GREEN},
+    'L': {'shape': 
+         [[0, 0, 1],
+          [1, 1, 1]], 'color': RED}
+     }
