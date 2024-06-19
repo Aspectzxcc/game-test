@@ -58,6 +58,7 @@ while running:
     if elapsed_time > move_interval:
         piece_locked = move_piece_down(current_piece)
         if piece_locked:
+            lock_piece(current_piece)
             current_piece = get_new_piece()
             piece_locked = False
         last_move_time = current_time
