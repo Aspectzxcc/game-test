@@ -29,9 +29,24 @@ def lock_piece(current_piece):
     """Lock the piece into the grid and check for line clears."""
     for x, y in get_occupied_positions(current_piece):
         GAME_GRID[x][y] = current_piece['color']
-    # clear_lines(GAME_GRID)
+    clear_lines()
     # if check_game_over(get_new_piece(), GAME_GRID):
         # Handle game over scenario
+        
+def clear_lines():
+    """Remove all fully occupied rows from the grid and shift remaining rows down."""
+    rows_to_clear = []  # List to hold the indices of rows to clear
+    for i, row in enumerate(GAME_GRID):
+        if all(cell != 0 for cell in row):  # Check if the row is fully occupied (assuming 0 represents an empty cell)
+            rows_to_clear.append(i)
+    
+    for i in sorted(rows_to_clear, reverse=True):
+        del GAME_GRID[i]  # Remove the fully occupied row
+        GAME_GRID.insert(0, [0 for _ in range(len(GAME_GRID[0]))])  # Add an empty row at the top of the grid
+
+        # Print the game grid in an easily viewable format
+        for row in GAME_GRID:
+            print(' '.join(str(cell) for cell in row))
     
 def move_piece_down(current_piece):
     """Move the current piece down by one row or lock it if it can't move. Return a boolean indicating if the piece was locked."""
