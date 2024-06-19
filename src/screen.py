@@ -97,7 +97,6 @@ def display_game_over_screen(screen):
     while waiting_for_input:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
-                waiting_for_input = False
+                return True
             elif event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+                return False

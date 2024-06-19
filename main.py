@@ -12,15 +12,24 @@ screen = init_screen(SCREEN_WIDTH, SCREEN_HEIGHT)
 
 # Main game loop
 clock = pygame.time.Clock()
-running = True
 
-# Initialize the current piece
+# game variables
+running = True 
+game_over = False
 current_piece = get_new_piece()
 piece_locked = False
-
-# Initialize the timer for moving the piece down
-last_move_time = pygame.time.get_ticks()
+last_move_time =  pygame.time.get_ticks()
 move_interval = MOVE_INTERVAL
+
+def reset_game():
+    global GAME_GRID, running, game_over, current_piece, piece_locked, last_move_time, move_interval
+    GAME_GRID = [[0 for _ in range(GRID_OPTIONS['columns'])] for _ in range(GRID_OPTIONS['rows'])]
+    running = True 
+    game_over = False
+    current_piece = get_new_piece()
+    piece_locked = False
+    last_move_time =  pygame.time.get_ticks()
+    move_interval = MOVE_INTERVAL
 
 while running:
     current_time = pygame.time.get_ticks()
@@ -60,17 +69,28 @@ while running:
         if piece_locked:
             game_over = lock_piece(current_piece)  # lock_piece now returns True if game over
             if game_over:
-                running = False  # Stop the game loop
-                display_game_over_screen(screen) 
-            else:
-                current_piece = get_new_piece()
-                piece_locked = False
+                should_continue = display_game_over_screen(screen)
+                if should_continue:
+                    reset_game()
+                else:
+                    running = False 
+            current_piece = get_new_piece()
+            piece_locked = False
         last_move_time = current_time
 
     # Fill the background, game logic, and update display
     screen.fill(SCREEN_BG)
     render_grid(screen)
     draw_piece(screen, current_piece)
+    
+    if game_over:
+        should_continue = display_game_over_screen(screen)
+        if should_continue:
+            reset_game()
+        else:
+            running = False 
+        
+    # Update the display
     pygame.display.flip()
 
     # Cap the frame rate
