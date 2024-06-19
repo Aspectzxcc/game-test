@@ -2,7 +2,7 @@ import pygame
 import sys
 from src.settings import *
 from src.screen import *
-from src.tetromino import *
+from src.game_logic import *
 
 # Initialize Pygame
 pygame.init()
@@ -58,9 +58,13 @@ while running:
     if elapsed_time > move_interval:
         piece_locked = move_piece_down(current_piece)
         if piece_locked:
-            lock_piece(current_piece)
-            current_piece = get_new_piece()
-            piece_locked = False
+            game_over = lock_piece(current_piece)  # lock_piece now returns True if game over
+            if game_over:
+                running = False  # Stop the game loop
+                # display_game_over_screen() 
+            else:
+                current_piece = get_new_piece()
+                piece_locked = False
         last_move_time = current_time
 
     # Fill the background, game logic, and update display
