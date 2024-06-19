@@ -22,6 +22,21 @@ piece_locked = False
 last_move_time = pygame.time.get_ticks()
 move_interval = MOVE_INTERVAL
 
+def reset_game():
+    global current_piece, last_move_time, piece_locked, move_interval, running, screen, GAME_GRID
+
+    # Reinitialize game state variables
+    current_piece = get_new_piece()  # Reset the current piece
+    last_move_time = 0  # Reset the last move time
+    piece_locked = False  # Reset the piece locked state
+    move_interval = MOVE_INTERVAL  # Reset the move interval to its initial value from settings
+
+    # Clear the game grid
+    GAME_GRID = [[0 for _ in range(GRID_OPTIONS['columns'])] for _ in range(GRID_OPTIONS['rows'])]
+
+    # Reset the running state to True to restart the game loop
+    running = True
+
 while running:
     current_time = pygame.time.get_ticks()
     
@@ -60,7 +75,10 @@ while running:
         if piece_locked:
             lock_piece(current_piece)
             if check_game_over():
-                running = False  # Exit the main game loop
+                if display_game_over_message(screen):
+                    reset_game()
+                else:
+                    running = False  # Exit game loop
             current_piece = get_new_piece()
             piece_locked = False
         last_move_time = current_time
